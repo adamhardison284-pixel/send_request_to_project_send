@@ -21,7 +21,7 @@ def trigger_process_emails(worker_id):
             timeout=30
         )
         print(worker_id, response.status_code)
-        print(response)
+        print(response.text)
         print("=====================================================================================")
     except Exception as e:
         print("Error:", e)
