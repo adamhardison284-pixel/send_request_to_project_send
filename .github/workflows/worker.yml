@@ -1,8 +1,8 @@
 name: Supabase Workers (Hourly)
 
 on:
-  schedule:
-    - cron: "0 * * * *"
+  #schedule:
+  #  - cron: "0 * * * *"
   workflow_dispatch:
 
 jobs:
