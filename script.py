@@ -4,7 +4,7 @@ import time
 URL = "https://wjbczrcovyoolwrnnmpg.supabase.co/functions/v1/PojectSend"
 
 INTERVAL = 2          # seconds between requests
-RUN_DURATION = 300    # run for 5 minutes
+RUN_DURATION = 3600   # 1 hour
 
 
 def trigger_process_emails(worker_id):
@@ -33,7 +33,7 @@ def trigger_process_emails(worker_id):
 
 def main():
     inc = 0
-    total_runs = RUN_DURATION // INTERVAL
+    total_runs = RUN_DURATION // INTERVAL  # how many requests in 1 hour
 
     for _ in range(total_runs):
         inc += 1
