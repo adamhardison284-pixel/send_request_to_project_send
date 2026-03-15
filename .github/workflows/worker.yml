@@ -1,30 +1,46 @@
 name: Supabase Workers (Hourly)
 
 on:
-  #schedule:
-  #  - cron: "0 * * * *"
   workflow_dispatch:
+
+# schedule:
+
+# - cron: "0 * * * *"
 
 jobs:
   run-workers:
     runs-on: ubuntu-latest
     timeout-minutes: 70
-
+    
     strategy:
+      fail-fast: false
       matrix:
-        worker: [1, 2, 3, 4, 5]   # number of parallel workers
-
+        include:
+          - worker: 1
+            url: https://lezrsmwspvrdahngtvli.supabase.co/functions/v1/PojectSend
+          - worker: 2
+            url: https://vuudkapcuwtkepeqkpfx.supabase.co/functions/v1/PojectSend
+          - worker: 3
+            url: https://guypgtlqmsoyjvsspfro.supabase.co/functions/v1/PojectSend
+          - worker: 4
+            url: https://neighiwqhabqzhakwupe.supabase.co/functions/v1/PojectSend
+          - worker: 5
+            url: https://gmweskylxvbhhgrcftbo.supabase.co/functions/v1/PojectSend
+    
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+    
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - run: |
-          pip install requests
-
+    
+      - name: Install requests
+        run: pip install requests
+    
       - name: Run worker
         run: python -u script.py
         env:
           WORKER_ID: worker${{ matrix.worker }}
+          URL: ${{ matrix.url }}
