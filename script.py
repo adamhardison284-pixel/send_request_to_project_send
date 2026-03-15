@@ -2,7 +2,7 @@ import requests
 import time
 import os
 
-URL = "https://wjbczrcovyoolwrnnmpg.supabase.co/functions/v1/PojectSend"
+URL = os.getenv("URL")
 
 INTERVAL = 2
 RUN_DURATION = 3600
@@ -11,6 +11,7 @@ WORKER_PREFIX = os.getenv("WORKER_ID", "worker")
 
 
 def trigger_process_emails(worker_id):
+    print('url', URL)
     try:
         response = requests.post(
             URL,
